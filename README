@@ -1,0 +1,28 @@
+shm_rampin.c - http://code.tabo.pe/shm_rampin/
+ 
+Copyright (c) 2009 Gustavo Picon
+
+
+Locks/unlocks Linux shared memory segments in RAM, so they're never swapped.
+(This is linux only. In BSD, use sysctl kern.ipc.shm_use_phys)
+
+Usage: shm_rampin [OPTIONS]
+
+Options:
+  -l               locks shared memory segments
+  -u               unlocks shared memory segments
+  -i <shmid>       performs the action in a specific shmid
+                   (ipcs -m for a list)
+  -U <user_name>   performs the action in all the shmems that
+                   belong to a given user
+  -h               displays this help message
+
+
+For instance to lock all the shared memory segments that belong to
+the `postgres` user in RAM:
+
+    shm_rampin -l -U postgres
+
+And to unlock them:
+
+    shm_rampin -u -U postgres
